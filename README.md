@@ -1,18 +1,17 @@
 How to run
 ==========
 
-1. Set the GOPATH variable to the current directory
+Set the GOPATH variable to the current directory
 ```bash
 # export GOPATH=`pwd`
 ```
 
-2. Build the binary file
+Build the binary file
 ```bash
 # make all
 ```
 
-4. Run it
-
+Run the server
 ```bash
-./bin/memdb-race
+# ./bin/memdb-race
 ```
