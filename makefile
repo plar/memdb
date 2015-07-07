@@ -1,3 +1,7 @@
+all: prepare clean get test-race build-race
+	@echo "*** Done!"
+
+
 prepare:
 	@echo "*** Create bin & pkg dirs, if not exists..."
 	@mkdir -p bin
@@ -49,5 +53,3 @@ clean-pkg:
 
 clean: clean-bin clean-pkg
 
-all: prepare clean get test-race build-race
-	@echo "*** Done!"
