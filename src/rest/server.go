@@ -39,6 +39,11 @@ func (s *Server) Run() {
 	http.ListenAndServe("127.0.0.1:8080", s.router)
 }
 
+//
+// POST /reservations/{key}
+//
+// Wait for {key} to be available (ignore cases where the client times out), then acquire a lock on it (and its value).
+//
 func (s *Server) GetAndLock(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 

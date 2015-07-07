@@ -1,6 +1,7 @@
 prepare:
 	@echo "*** Create bin & pkg dirs, if not exists..."
-	@mkdir -p {bin,pkg}
+	@mkdir -p bin
+	@mkdir -p pkg
 
 get:
 	@echo "*** Resolve dependencies..."
@@ -16,6 +17,19 @@ test-race:
 	@echo "*** Run tests with race condition..."
 	@go test --race -v ./src/memdb/...
 	@go test --race -v ./src/rest/...
+
+test-cover:
+	@go test -covermode=count -coverprofile=/tmp/coverage_memdb.out ./src/memdb/...
+	@go test -covermode=count -coverprofile=/tmp/coverage_rest.out ./src/rest/...
+
+	@rm -f /tmp/memdb_coverage.out
+	@echo "mode: count" > /tmp/memdb_coverage.out
+	@cat /tmp/coverage_memdb.out | tail -n +2 >> /tmp/memdb_coverage.out
+	@rm /tmp/coverage_memdb.out
+	@cat /tmp/coverage_rest.out | tail -n +2  >> /tmp/memdb_coverage.out
+	@rm /tmp/coverage_rest.out
+
+	@go tool cover -html=/tmp/memdb_coverage.out
 
 build:
 	@echo "*** Build project..."
