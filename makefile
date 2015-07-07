@@ -1,3 +1,7 @@
+prepare:
+	@echo "*** Create bin & pkg dirs, if not exists..."
+	@mkdir -p {bin,pkg}
+
 get:
 	@echo "*** Resolve dependencies..."
 	@go get -v github.com/gorilla/mux
@@ -31,5 +35,5 @@ clean-pkg:
 
 clean: clean-bin clean-pkg
 
-all: clean get test-race build-race
+all: prepare clean get test-race build-race
 	@echo "*** Done!"
